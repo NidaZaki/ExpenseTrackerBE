@@ -16,6 +16,11 @@ public class ExpenseController {
         this.expenseService = expenseService;
     }
 
+    @GetMapping("/test")
+    public ResponseEntity<String> getTest() {
+        return ResponseEntity.ok("Test Pass");
+    }
+
     @GetMapping
     public ResponseEntity<List<Expenses>> getAllExpenses() {
         return ResponseEntity.ok(this.expenseService.getAllExpenses());
