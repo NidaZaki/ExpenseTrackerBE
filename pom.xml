@@ -1,28 +1,86 @@
-<plugin>
-    <groupId>com.microsoft.azure</groupId>
-    <artifactId>azure-webapp-maven-plugin</artifactId>
-    <version>2.2.0</version>
-    <configuration>
-        <subscriptionId>3863b0e8-b27b-4064-a665-5be080ef3f32</subscriptionId>
-        <resourceGroup>Expense</resourceGroup>
-        <appName>expensetrackerbe</appName>
-        <pricingTier>DreamSpark</pricingTier>
-        <region>eastus</region>
-        <runtime>
-            <os>Linux</os>
-            <webContainer>Java SE</webContainer>
-            <javaVersion>Java 17</javaVersion>
-        </runtime>
-        <deployment>
-            <resources>
-                <resource>
-                    <type>jar</type>
-                    <directory>${project.basedir}/target</directory>
-                    <includes>
-                        <include>*.jar</include>
-                    </includes>
-                </resource>
-            </resources>
-        </deployment>
-    </configuration>
-</plugin>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.0.2</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.expensebe</groupId>
+    <artifactId>expensebe</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>expensebe</name>
+    <description>Demo project for Spring Boot</description>
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.microsoft.azure</groupId>
+                <artifactId>azure-webapp-maven-plugin</artifactId>
+                <version>2.2.0</version>
+                <configuration>
+                    <subscriptionId>3863b0e8-b27b-4064-a665-5be080ef3f32</subscriptionId>
+                    <resourceGroup>Expense</resourceGroup>
+                    <appName>expensetrackerbe</appName>
+                    <pricingTier>DreamSpark</pricingTier>
+                    <region>eastus</region>
+                    <runtime>
+                        <os>Linux</os>
+                        <webContainer>Java SE</webContainer>
+                        <javaVersion>Java 17</javaVersion>
+                    </runtime>
+                    <deployment>
+                        <resources>
+                            <resource>
+                                <type>jar</type>
+                                <directory>${project.basedir}/target</directory>
+                                <includes>
+                                    <include>*.jar</include>
+                                </includes>
+                            </resource>
+                        </resources>
+                    </deployment>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
