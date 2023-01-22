@@ -46,8 +46,8 @@ jobs:
           distribution: ${{ env.DISTRIBUTION }}
           cache: 'maven'
 
-      - name: Build with Maven
-        run: mvn clean install
+      - name: Build with Gradle
+        run: gradle azureWebAppDeploy
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
