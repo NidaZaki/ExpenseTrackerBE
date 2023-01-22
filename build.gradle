@@ -31,3 +31,19 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+azurewebapp {
+	subscription = '3863b0e8-b27b-4064-a665-5be080ef3f32'
+	resourceGroup = 'Expense'
+	appName = 'expensetrackerbe'
+	pricingTier = 'DreamSpark'
+	region = 'East US'
+	runtime {
+		os = 'windows'
+		javaVersion ='Java 17'
+		webContainer = 'Java SE'
+	}
+	auth {
+		type = 'azure_cli' // support azure_cli, oauth2, device_code and service_principal
+	}
+}
