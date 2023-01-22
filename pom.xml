@@ -1,0 +1,28 @@
+<plugin>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>azure-webapp-maven-plugin</artifactId>
+    <version>2.2.0</version>
+    <configuration>
+        <subscriptionId>3863b0e8-b27b-4064-a665-5be080ef3f32</subscriptionId>
+        <resourceGroup>Expense</resourceGroup>
+        <appName>expensetrackerbe</appName>
+        <pricingTier>DreamSpark</pricingTier>
+        <region>eastus</region>
+        <runtime>
+            <os>Linux</os>
+            <webContainer>Java SE</webContainer>
+            <javaVersion>Java 17</javaVersion>
+        </runtime>
+        <deployment>
+            <resources>
+                <resource>
+                    <type>jar</type>
+                    <directory>${project.basedir}/target</directory>
+                    <includes>
+                        <include>*.jar</include>
+                    </includes>
+                </resource>
+            </resources>
+        </deployment>
+    </configuration>
+</plugin>
