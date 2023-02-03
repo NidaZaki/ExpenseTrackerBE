@@ -16,7 +16,7 @@ public class ExpenseCategoryController {
     }
 
     @GetMapping("/{userName}")
-    public ResponseEntity<ExpenseCategory> getExpensesByCategory(@PathVariable String userName, @RequestParam Integer month, @RequestParam Integer year){
+    public ResponseEntity<ExpenseCategory> getExpensesByCategory(@PathVariable String userName, @RequestParam (required = false) String month, @RequestParam (required = false)String year){
         return ResponseEntity.ok(this.expenseCategoryService.getExpensesByCategory(userName, month, year));
     }
 }

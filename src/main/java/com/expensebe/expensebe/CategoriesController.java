@@ -22,14 +22,9 @@ public class CategoriesController {
     }
 
     @GetMapping("/getExpensesByCategory/{userName}")
-    public ResponseEntity<List<Integer>> getExpensesByCategory(@PathVariable String userName , @RequestParam Integer month, @RequestParam Integer year){
+    public ResponseEntity<List<Integer>> getExpensesByCategory(@PathVariable String userName , @RequestParam String month, @RequestParam String year){
         return ResponseEntity.ok(this.categoriesService.getExpensesByCategory(userName, month, year));
     }
-
-//    @GetMapping("/getExpensesByCategory/{userName}")
-//    public ResponseEntity<ExpenseCategory> getObjectByCategory(@PathVariable String userName){
-//        return ResponseEntity.ok(this.categoriesService.getObjectByCategory(userName));
-//    }
 
     @PostMapping
     public ResponseEntity<Categories> postCategories(@RequestBody Categories categories) {

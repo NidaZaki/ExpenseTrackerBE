@@ -3,7 +3,6 @@ package com.expensebe.expensebe;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/expenses")
@@ -22,8 +21,11 @@ public class ExpenseController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Expenses>> getAllExpenses() {
-        return ResponseEntity.ok(this.expenseService.getAllExpenses());
+    public ResponseEntity<ExpenseData> getExpenseData(@RequestParam(required = false) String month,
+                                                      @RequestParam(required = false) String year,
+                                                      @RequestParam(required = false) String category,
+                                                      @RequestParam(required = false) String userName) {
+        return ResponseEntity.ok(this.expenseService.getExpenseData(month, year, category, userName));
     }
 
     @PostMapping

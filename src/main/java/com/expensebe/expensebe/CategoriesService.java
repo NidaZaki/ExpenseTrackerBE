@@ -30,20 +30,41 @@ public class CategoriesService {
         return this.categoriesRepository.save(categories);
     }
 
-    public List<Integer> getExpensesByCategory(String userName, Integer month, Integer year){
-        int sumByCategory;
-        List<Integer> expenseByCategoryList = new ArrayList<>();
-        List<Expenses> expenseList = this.expenseService.getAllExpenses().stream().filter(expenses -> Objects.equals(expenses.getDate().split("-")[0], year.toString()) && Objects.equals(expenses.getDate().split("-")[1], month.toString())).collect(Collectors.toList());
-        Categories categories = getCategoryList(userName);
-        for(String categoryItem : categories.getCategories()){
-            sumByCategory = 0;
-            for (Expenses expenses : expenseList){
-                 if (Objects.equals(expenses.getCategory(), categoryItem)){
-                     sumByCategory += expenses.getAmount();
-                 }
+    public List<Integer> getExpensesByCategory(String userName, String month, String year){
+        if(!Objects.equals(month, "13")){
+            int sumByCategory;
+            List<Integer> expenseByCategoryList = new ArrayList<>();
+            List<Expenses> expenseList = this.expenseService.getAllExpenses(userName, month, year);
+            Categories categories = getCategoryList(userName);
+            for(String categoryItem : categories.getCategories()){
+                sumByCategory = 0;
+                for (Expenses expenses : expenseList){
+                    if (Objects.equals(expenses.getCategory(), categoryItem)){
+                        sumByCategory += expenses.getAmount();
+                    }
+                }
+                expenseByCategoryList.add(categories.getCategories().indexOf(categoryItem), sumByCategory);
             }
-            expenseByCategoryList.add(categories.getCategories().indexOf(categoryItem), sumByCategory);
+            System.out.println("Expense" +expenseByCategoryList);
+            return expenseByCategoryList;
         }
-        return expenseByCategoryList;
+        else{
+            int sumByCategory;
+            List<Integer> expenseByCategoryList = new ArrayList<>();
+            List<Expenses> expenseList = this.expenseService.getAllExpenses(userName, month, year).stream().filter(expenses ->
+                    Objects.equals(expenses.getDate().split("-")[0], year.toString())).collect(Collectors.toList());
+            Categories categories = getCategoryList(userName);
+            for(String categoryItem : categories.getCategories()){
+                sumByCategory = 0;
+                for (Expenses expenses : expenseList){
+                    if (Objects.equals(expenses.getCategory(), categoryItem)){
+                        sumByCategory += expenses.getAmount();
+                    }
+                }
+                expenseByCategoryList.add(categories.getCategories().indexOf(categoryItem), sumByCategory);
+            }
+            return expenseByCategoryList;
+        }
+
     }
 }
