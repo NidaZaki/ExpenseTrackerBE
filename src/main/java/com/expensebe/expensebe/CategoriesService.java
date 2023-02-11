@@ -22,7 +22,14 @@ public class CategoriesService {
 
     public Categories getCategoryList(String userName) {
         List<Categories> categoryList = this.categoriesRepository.findAll();
-        Categories category = categoryList.stream().filter(item -> Objects.equals(item.getUserName(), userName)).findFirst().get();
+        Categories category = categoryList.stream().filter(item -> Objects.equals(item.getUserName(), userName)).findFirst().orElse(null);
+
+        if(category == null){
+            Categories cat = new Categories();
+            cat.setCategories(List.of("Housing", "Transportation", "Food", "Utilities", "Healthcare", "Insurance", "Custom", "Miscellaneous"));
+            cat.setUserName(userName);
+            return this.saveCategories(cat);
+        }
         return category;
     }
 
